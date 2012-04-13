@@ -41,8 +41,6 @@ class User < ActiveRecord::Base
   include OnlineRecord::UserMethods
   include Homework::UserMethods
   include HomeworkAssign::UserMethods
-  include HomeworkStudentUploadRequirement::UserMethods
-  include HomeworkStudentUpload::UserMethods
   include Teacher::UserMethods
   include Student::UserMethods
   

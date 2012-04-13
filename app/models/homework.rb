@@ -23,12 +23,12 @@ class Homework < ActiveRecord::Base
   validates :title, :content, :presence => true
   
   def assigned_by_student(student)
-    self.homework_assigns.where(:student => student).first
+    self.homework_assigns.where(:student_id => student.id).first
   end
   
   # 学生是否被分配
   def is_assigned(student)
-    self.homework_assigns.where(:student => student).exists?
+    self.homework_assigns.where(:student_id => student.id).exists?
   end
   
   

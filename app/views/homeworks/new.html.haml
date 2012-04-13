@@ -133,7 +133,7 @@
           
           if($("#del-a-student" + value).length == 0) {
             var delete_name = "<a href='javascript:' onclick='del_student(" + value + ")'>x</a>";
-            var input_string = "<span id='del-a-student" + value + "'>" + name + delete_name + "<input type='hidden' value='" + value + "' name='homework[homework_assigns_attributes][][creator_id]' /></span>";
+            var input_string = "<span id='del-a-student" + value + "'>" + name + delete_name + "<input type='hidden' value='" + value + "' name='homework[homework_assigns_attributes][][student_id]' /></span>";
             $('#selected-students').append(input_string);
           }
           
@@ -189,8 +189,8 @@
   #student-temp-list{:style => "display: none;"}
   #student-list{:style => "display: none;"}
     -@students.each do |student|
-      %div{:id => "student-current-#{student.user_id}"}
-        %input{:type=>'checkbox', :value => student.user_id, :name=>"#{student.real_name}"} 
+      %div{:id => "student-current-#{student.id}"}
+        %input{:type=>'checkbox', :value => student.id, :name=>"#{student.real_name}"} 
         #{student.real_name}
     
     %input#confirm-students{:name => "confirm_btn", :type => "button", :value => "确定"}/

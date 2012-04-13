@@ -13,7 +13,7 @@ class StudentController < ApplicationController
 
   def show
     @homework = Homework.find(params[:id])
-    @student_homework = current_user.homework_assigns.find_by_homework_id(params[:id])
+    @student_homework = current_user.student.homework_assigns.find_by_homework_id(params[:id])
     @homework_assign = HomeworkAssign.new
 
   end

@@ -19,4 +19,9 @@ class Student < ActiveRecord::Base
       end
     end
   end
+  
+  # ----------- 以下是方法扩充
+  include HomeworkStudentUploadRequirement::UserMethods
+  include HomeworkStudentUpload::UserMethods
+  
 end

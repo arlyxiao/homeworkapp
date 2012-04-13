@@ -74,7 +74,7 @@
     
     // 确定选择的班级列表
     jQuery('#confirm-teams').click(function(){
-      $('#team-list').hide();
+      $('#student-block').hide();
       var selected = new Array();
       $('#team-list input:checked').each(function() {
  
@@ -113,6 +113,9 @@
       // 先隐藏班级
       $('#team-list').hide();
       
+      // 整个学生块先显示出来
+      $('#student-block').show();
+      
       // 学生列表显示出来
       $('#student-list').show();
       
@@ -123,7 +126,7 @@
     
     // 确定选择的学生列表
     jQuery('#confirm-students').click(function(){
-      $('#student-list').hide();
+      $('#student-block').hide();
       var selected = new Array();
       $('#student-list input:checked').each(function() {
           // selected.push($(this).attr('value'));
@@ -171,29 +174,31 @@
   
   %p
     #selected-teams
-    #selected-students 
+    #selected-students   
   
-  %p#category-by{:style => "display: none;"}
-    %span#team-by 按班级 
-    %span#student-by 按学生
-  
-  #team-temp-list{:style => "display: none;"}
-  #team-list{:style => "display: none;"}
-    -@teams.each do |team|
-      %div{:id => "team-current-#{team.id}"}
-        %input{:type=>'checkbox', :value => "#{team.id}", :name=>"#{team.name}"} 
-        #{team.name} (#{team.team_students.count})
-        
-    %input#confirm-teams{:name => "confirm_btn", :type => "button", :value => "确定"}/
-  
-  #student-temp-list{:style => "display: none;"}
-  #student-list{:style => "display: none;"}
-    -@students.each do |student|
-      %div{:id => "student-current-#{student.id}"}
-        %input{:type=>'checkbox', :value => student.id, :name=>"#{student.real_name}"} 
-        #{student.real_name}
+  #student-block{:style => "display: none;"}
+
+    %p#category-by{:style => "display: none;"}
+      %span#team-by 按班级 
+      %span#student-by 按学生
     
-    %input#confirm-students{:name => "confirm_btn", :type => "button", :value => "确定"}/
+    #team-temp-list{:style => "display: none;"}
+    #team-list{:style => "display: none;"}
+      -@teams.each do |team|
+        %div{:id => "team-current-#{team.id}"}
+          %input{:type=>'checkbox', :value => "#{team.id}", :name=>"#{team.name}"} 
+          #{team.name} (#{team.team_students.count})
+          
+      %input#confirm-teams{:name => "confirm_btn", :type => "button", :value => "确定"}/
+    
+    #student-temp-list{:style => "display: none;"}
+    #student-list
+      -@students.each do |student|
+        %div{:id => "student-current-#{student.id}"}
+          %input{:type=>'checkbox', :value => student.id, :name=>"#{student.real_name}"} 
+          #{student.real_name}
+      
+      %input#confirm-students{:name => "confirm_btn", :type => "button", :value => "确定"}/
   
   
   

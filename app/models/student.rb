@@ -1,7 +1,6 @@
 class Student < ActiveRecord::Base
   # --- 模型关联
   belongs_to :user
-  scope :find, lambda { |homework_id| { :conditions => ['homeworks.id = ?', homework_id] } }
 
   has_many :homework_assigns
   

@@ -57,7 +57,7 @@ class Homework < ActiveRecord::Base
   
   # 学生提交作业
   def submit_by_student(user, content = '')
-    homework_assign = self.homework_assigns.find_by_creator_id(user.id)
+    homework_assign = self.homework_assigns.find_by_student_id(user.id)
     homework_assign.content = content
     homework_assign.is_submit = true
     homework_assign.has_finished = true

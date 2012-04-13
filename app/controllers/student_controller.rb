@@ -13,14 +13,16 @@ class StudentController < ApplicationController
 
   def show
     @homework = Homework.find(params[:id])
-    @student_homework = current_user.student.homeworks.find(params[:id])
+    @student_assign = current_user.student.homework_assigns.find_by_homework_id(params[:id])
     @homework_assign = HomeworkAssign.new
 
   end
 
   def create
-    homework = Homework.find(params[:homework_assign][:homework_id])
-    return redirect_to :back if homework.submit_by_student(current_user,params[:homework_assign][:content])
+    homework_id = params[:homework_assign][:homework_id]
+    content = params[:homework_assign][:content]
+    homework = Homework.find(homework_id)
+    return redirect_to :back if homework.submit_by_student(current_user, content)
 
     error = @homework_assign.errors.first
 	  flash.now[:error] = "#{error[0]} #{error[1]}"

@@ -3,6 +3,7 @@ class HomeworkAssign < ActiveRecord::Base
   belongs_to :homework, :class_name => 'Homework'
   belongs_to :student, :class_name => 'Student', :foreign_key => 'student_id'
   
+  
   # --- 校验方法
   #validates :student, :presence => true
   

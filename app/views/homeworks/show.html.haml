@@ -1,4 +1,5 @@
 :ruby
+  teacher_attachements_count = @homework.homework_teacher_attachements.count
   student_attachements_count = @homework.homework_student_upload_requirements.count
 
 %p= link_to '作业列表', homeworks_path
@@ -20,7 +21,7 @@
 
 %div 
   提交物
-  = student_attachements_count
+  = teacher_attachements_count
   - @homework.homework_teacher_attachements.each do |attachement|
     = attachement.attachement_file_name
   %div

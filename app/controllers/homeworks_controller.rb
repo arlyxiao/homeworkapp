@@ -28,7 +28,7 @@ class HomeworksController < ApplicationController
           team.students.each do |student|
             
             # 如果学生没有被分配到作业
-            unless @homework.is_assigned(student)
+            unless @homework.has_assigned(student)
               HomeworkAssign.create(:student => student, :homework => @homework) 
             end
             

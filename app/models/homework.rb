@@ -27,7 +27,7 @@ class Homework < ActiveRecord::Base
   end
   
   # 学生是否被分配
-  def is_assigned(student)
+  def has_assigned(student)
     self.homework_assigns.where(:student_id => student.id).exists?
   end
   

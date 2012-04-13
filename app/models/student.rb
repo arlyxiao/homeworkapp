@@ -1,6 +1,19 @@
 class Student < ActiveRecord::Base
   # --- 模型关联
   belongs_to :user
+  scope :find, lambda { |homework_id| { :conditions => ['homeworks.id = ?', homework_id] } }
+
+  has_many :homework_assigns
+  
+  # 学生所有被分配作业
+  has_many :homeworks, :through=>:homework_assigns
+      
+  # 学生未过期作业
+  has_many :undeadline_student_homeworks, :through=>:homework_assigns, :source=>:homework, :conditions => ['homeworks.deadline > ?', Time.now] 
+
+  # 学生已过期作业
+  has_many :deadline_student_homeworks, :through=>:homework_assigns, :source=>:homework, :conditions => ['homeworks.deadline <= ?', Time.now]
+
   
   # --- 校验方法
   validates :real_name, :presence=>true
@@ -10,6 +23,7 @@ class Student < ActiveRecord::Base
   module UserMethods
     def self.included(base)
       base.has_one :student
+
       base.send(:include,InstanceMethod)
     end
     
@@ -21,7 +35,6 @@ class Student < ActiveRecord::Base
   end
   
   # ----------- 以下是方法扩充
-  include HomeworkStudentUploadRequirement::UserMethods
-  include HomeworkStudentUpload::UserMethods
+  
   
 end

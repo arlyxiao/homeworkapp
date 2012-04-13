@@ -2,18 +2,18 @@ require 'zip/zip'
 class StudentController < ApplicationController
   def index
     if params[:status] == 'deadline'
-      @homeworks = current_user.deadline_student_homeworks
+      @homeworks = current_user.student.deadline_student_homeworks
     elsif params[:status] == 'undeadline'
-      @homeworks = current_user.undeadline_student_homeworks
+      @homeworks = current_user.student.undeadline_student_homeworks
     else
-      @homeworks = current_user.assigned_homeworks
+      @homeworks = current_user.student.homeworks
     end
     
   end
 
   def show
     @homework = Homework.find(params[:id])
-    @student_homework = current_user.student.homework_assigns.find_by_homework_id(params[:id])
+    @student_homework = current_user.student.homeworks.find(params[:id])
     @homework_assign = HomeworkAssign.new
 
   end

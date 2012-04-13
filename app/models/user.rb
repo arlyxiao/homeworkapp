@@ -40,7 +40,8 @@ class User < ActiveRecord::Base
   # ----------- 以下是方法扩充
   include OnlineRecord::UserMethods
   include Homework::UserMethods
-  include HomeworkAssign::UserMethods
+  include HomeworkStudentUploadRequirement::UserMethods
+  include HomeworkStudentUpload::UserMethods
   include Teacher::UserMethods
   include Student::UserMethods
   

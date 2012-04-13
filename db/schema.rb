@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120412053525) do
+ActiveRecord::Schema.define(:version => 20120413015331) do
 
   create_table "answer_votes", :force => true do |t|
     t.integer  "user_id"
@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(:version => 20120412053525) do
   end
 
   create_table "homework_assigns", :force => true do |t|
-    t.integer  "creator_id"
+    t.integer  "student_id"
     t.integer  "homework_id"
     t.text     "content"
     t.boolean  "is_submit",    :default => false

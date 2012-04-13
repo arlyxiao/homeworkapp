@@ -13,26 +13,23 @@ class HomeworksController < ApplicationController
       unless teacher_attachements.blank?
         teacher_attachements.each do |attachement_id|
           homework_teacher_attachement = HomeworkTeacherAttachement.find(attachement_id)
-          homework_teacher_attachement.homework_id = @homework.id
-          homework_teacher_attachement.creator_id = current_user.id
+          homework_teacher_attachement.homework = @homework
+          homework_teacher_attachement.creator = current_user
           homework_teacher_attachement.save
         end
       end
       
+      # 把家庭作业分配给班级里的学生
       teams = params[:teams]
       unless teams.blank?
         teams.each do |team_id|
           team = Team.find(team_id)
                    
-          team.team_students.each do |student|
-
-            unless @homework.is_assigned(student.student_id)
-              homework_assign = HomeworkAssign.new
-              homework_assign.creator_id = student.student_id
-              homework_assign.homework_id = @homework.id
-              homework_assign.created_at = Time.now
-              homework_assign.updated_at = Time.now
-              homework_assign.save
+          team.students.each do |student|
+            
+            # 如果学生没有被分配到作业
+            unless @homework.is_assigned(student)
+              HomeworkAssign.create(:student => student, :homework => @homework) 
             end
             
           end

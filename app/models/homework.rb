@@ -22,13 +22,13 @@ class Homework < ActiveRecord::Base
   # --- 校验方法
   validates :title, :content, :presence => true
   
-  def assigned_by_student(user)
-    self.homework_assigns.where(:creator_id => user.id).first
+  def assigned_by_student(student)
+    self.homework_assigns.where(:student => student).first
   end
   
   # 学生是否被分配
-  def is_assigned(creator_id)
-    self.homework_assigns.where(:creator_id => creator_id).exists?
+  def is_assigned(student)
+    self.homework_assigns.where(:student => student).exists?
   end
   
   
